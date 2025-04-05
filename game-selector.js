@@ -133,21 +133,6 @@ async function isGameAccessible(gameId) {
     return false;
 }
 
-// Function to check if user is a guest and handle password check
-async function checkGuestAccess(gameId) {
-    const userData = JSON.parse(sessionStorage.getItem('userData') || '{}');
-    
-    if (!userData.isGuest) {
-        return true; // Not a guest, proceed normally
-    }
-
-    // Convert gameId to proper folder name format for the path
-    const gamePath = convertGamePath(gameId);
-
-    // For guest users, redirect to verification page
-    window.location.href = `/guest-verify.html?game=${encodeURIComponent(gameId)}&path=${encodeURIComponent(`/${gamePath}/index.html`)}`;
-    return false; // Prevent default navigation
-}
 
 // Function to handle game button clicks
 function handleGameClick(gameId) {
@@ -380,12 +365,6 @@ async function sortGames() {
 
 // Function to filter games based on search
 async function searchGames() {
-    // Check if user is logged in first
-    const userData = sessionStorage.getItem('userData');
-    if (!userData) {
-        window.location.href = 'index.html';
-        return;
-    }
 
     const searchTerm = document.getElementById('searchBar').value.toLowerCase();
     const menuContainers = document.getElementsByClassName('menuContainer');
