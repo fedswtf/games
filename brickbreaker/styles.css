@@ -1,0 +1,184 @@
+/* Font Declaration */
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../font/ProductSans-Regular.html') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../font/ProductSans-Bold.html') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+:root {
+    --paddle-color: #3498db;
+    --ball-color: #e74c3c;
+    --brick-colors: #e74c3c, #e67e22, #f1c40f, #2ecc71, #3498db;
+}
+
+body {
+    font-family: 'Product Sans', Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#gameCanvas {
+    border: 2px solid #333;
+    margin-top: 150px;
+    box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
+    border-radius: 10px;
+}
+
+.controls {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 100;
+}
+
+.stat {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #fff;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+#startScreen, #gameOver {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(52, 152, 219, 0.3);
+    color: #fff;
+}
+
+#gameOver {
+    display: none;
+}
+
+#winScreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(46, 204, 113, 0.4);
+    color: #fff;
+    display: none;
+}
+
+#winScreen h2 {
+    color: #2ecc71;
+    text-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
+}
+
+#start-btn, .game-selector-btn, .mobileBtn, #play-again, #play-again-win {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+}
+
+#start-btn:hover, .game-selector-btn:hover, .mobileBtn:hover, #play-again:hover, #play-again-win:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+.power-up-indicator {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #fff;
+    display: none;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.game-selector-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.game-selector-btn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+.mobileBtn {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.mobileBtn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+} 

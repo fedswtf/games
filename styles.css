@@ -1,0 +1,506 @@
+/* Font Declaration */
+@font-face {
+    font-family: 'Product Sans';
+    src: url('font/ProductSans-Regular.html') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('font/ProductSans-Bold.html') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    appearance: none;
+}
+
+body {
+    font-family: 'Product Sans', Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: 100vh; /* Ensures the body takes at least the height of the screen */
+    margin: 0;
+    flex-direction: column;
+    padding-bottom: 30px; /* Extra padding to prevent cutting off at the bottom */
+}
+
+/* Top bar styling */
+#topBar {
+    width: calc(100% - 40px);
+    height: 80px;
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    --scroll-progress: 0;
+}
+
+/* Top bar when scrolled */
+#topBar.scrolled {
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 0;
+    height: calc(80px - (30px * var(--scroll-progress)));
+    box-shadow: 0 4px 15px rgba(0, 0, 0, calc(0.1 + (0.05 * var(--scroll-progress))));
+}
+
+/* Game Selector Title */
+#gameSelectorTitle {
+    font-size: calc(18px - (2px * var(--scroll-progress)));
+    font-weight: bold;
+    color: #000;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Search Bar inside the Top Rectangle */
+#searchWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    transition: all 0.3s ease-in-out;
+}
+
+#searchBar {
+    width: calc(200px - (50px * var(--scroll-progress)));
+    padding: calc(10px - (2px * var(--scroll-progress)));
+    font-size: calc(14px - (2px * var(--scroll-progress)));
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+#searchBar::placeholder {
+    color: #aaa;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Games Grid Container */
+#gamesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 100px auto 0;
+    padding: 0 20px;
+}
+
+/* Preview image styling */
+#sudokuImage, #snakeImage, #whackamoleImage, #tetrisImage, 
+#spaceshooterImage, #paperplaneImage, #memoryImage, 
+#doodlejumpImage, #brickbreakerImage, #tic-tac-toe-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu container adjustments */
+.menuContainer {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+/* Style for inaccessible games */
+.menuContainer.inaccessible {
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+    cursor: not-allowed !important;
+    pointer-events: auto !important;
+}
+
+.menuContainer.inaccessible * {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+.menuContainer.inaccessible button {
+    background-color: #666;
+    cursor: not-allowed !important;
+    transition: all 0.3s ease;
+    pointer-events: none !important;
+}
+
+.menuContainer.inaccessible button:hover {
+    background-color: #666;
+    transform: scale(1);
+    cursor: not-allowed !important;
+}
+
+.menuContainer.inaccessible .game-link {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+/* Style for accessible games */
+.menuContainer:not(.inaccessible) {
+    opacity: 1;
+    filter: none;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.menuContainer:not(.inaccessible):hover {
+    transform: translateY(-5px);
+}
+
+.menuContainer:not(.inaccessible) button:hover {
+    background: linear-gradient(45deg, #000000, #333333);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Hide containers when filtered */
+.menuContainer.hidden {
+    display: none;
+}
+
+/* Content wrapper to allow flex-grow and push button to bottom */
+.menuContainer h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.menuContainer p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    flex-grow: 0;
+}
+
+.menuContainer img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 0;
+}
+
+/* Create a spacer to push the button to the bottom */
+.menuContainer .game-link {
+    margin-top: auto;
+    width: 100%;
+}
+
+.menuContainer button {
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.menuContainer button:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Additional tweaks */
+h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    #gamesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #gamesGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menuContainer {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    #sudokuImage, #snakeImage, #whackamoleImage, #tetrisImage, 
+    #spaceshooterImage, #paperplaneImage, #memoryImage, 
+    #doodlejumpImage, #brickbreakerImage, #tic-tac-toe-image {
+        height: 180px; /* Slightly smaller on mobile */
+    }
+}
+
+/* Key input styling */
+#keyInput {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.key-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.key-container input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.key-container button {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: auto;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.key-container button:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Disabled button styling */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Game link styling */
+.game-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Bottom bar styling */
+#bottomBar {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    grid-column: 1 / -1; /* Make it span full width */
+}
+
+.bottom-container {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Limit maximum width */
+}
+
+.bottom-container:first-child {
+    flex: 2; /* Make the key input container twice as wide */
+}
+
+.bottom-container .key-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.bottom-container .key-container input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    min-width: 200px; /* Ensure minimum width for the input */
+}
+
+.bottom-container .key-container button {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: auto;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.bottom-container .key-container button:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+.sign-out-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff3333, #ff4444);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(255, 51, 51, 0.8);
+}
+
+.sign-out-btn:hover {
+    background: linear-gradient(45deg, #ff3333, #ff4444, #ff3333);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(255, 51, 51, 1);
+    transform: translateY(-2px);
+}
+
+/* Preview container for square images */
+.preview-container {
+    width: 100%;
+    aspect-ratio: 1;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.square-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Menu Container adjustments for responsive layout */
+.menuContainer {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 300px;
+    max-width: 100%;
+}
+
+/* Hide number input arrows */
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+    margin: 0;
+}
+
+.number-input[type=number] {
+    max-width: 100%;
+    width: 100%;
+}
+
+.number-input {
+    width: 100%;
+    padding: 5px 25px 5px 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Beta game styling */
+.beta-game {
+    border: 2px solid #ff4444;
+    background: rgba(255, 68, 68, 0.05);
+    opacity: 0.9;
+}
+
+.beta-tag {
+    color: #ff4444;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.beta-label {
+    color: #ff4444;
+    font-size: 0.8em;
+    margin-left: 5px;
+    font-weight: normal;
+}

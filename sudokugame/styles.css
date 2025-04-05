@@ -1,0 +1,462 @@
+/* Font Declaration */
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../font/ProductSans-Regular.html') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../font/ProductSans-Bold.html') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* General Styles */
+body {
+    font-family: 'Product Sans', Arial, sans-serif;
+    text-align: center;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Make everything fit the screen */
+}
+
+/* Game Title and Lives */
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    margin-bottom: 5px; /* Add small space below title */
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 5px; /* Add small space below lives */
+}
+
+/* Menu Button */
+#menuButton, #gameSelectorButton {
+    position: absolute;
+    top: 10px;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+/* Positioning Menu Button on the left */
+#menuButton {
+    left: 10px;
+}
+
+#menuButton:hover, #gameSelectorButton:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+}
+
+#menuButton:active, #gameSelectorButton:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Positioning Game Selector Button with more space */
+#gameSelectorButton {
+    left: 165px;
+}
+
+/* Button Hover Effect */
+#menuButton:hover, #gameSelectorButton:hover, .numBtn:hover, #closePopup:hover, .difficultyBtn:hover, #customButton:hover, .end-btn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+}
+
+/* Sudoku Board */
+#gameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px; /* Add small space above game board */
+}
+
+#sudokuBoard {
+    width: 540px;
+    height: 540px;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    border: 8px solid black; /* Thick outer border */
+}
+
+/* Number Pad */
+#numberPad {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.numBtn {
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.numBtn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+}
+
+/* Popup Overlay */
+#popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Popup Menu */
+#popupMenu {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Close Button */
+#closePopup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+#closePopup:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+}
+
+/* Difficulty Buttons */
+.difficultyBtn {
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 15px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+}
+
+/* Easy button - Green */
+.difficultyBtn[data-difficulty="65"] {
+    background: linear-gradient(45deg, #4CAF50, #1B5E20);
+    box-shadow: 0 0 50px rgba(76, 175, 80, 0.8);
+}
+
+.difficultyBtn[data-difficulty="65"]:hover {
+    background: linear-gradient(45deg, #4CAF50, #1B5E20);
+    box-shadow: 0 0 70px rgba(76, 175, 80, 1);
+    transform: translateY(-2px);
+}
+
+/* Medium button - Orange */
+.difficultyBtn[data-difficulty="40"] {
+    background: linear-gradient(45deg, #FF9800, #E65100);
+    box-shadow: 0 0 50px rgba(255, 152, 0, 0.8);
+}
+
+.difficultyBtn[data-difficulty="40"]:hover {
+    background: linear-gradient(45deg, #FF9800, #E65100);
+    box-shadow: 0 0 70px rgba(255, 152, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Hard button - Red */
+.difficultyBtn[data-difficulty="25"] {
+    background: linear-gradient(45deg, #F44336, #8E0000);
+    box-shadow: 0 0 50px rgba(244, 67, 54, 0.8);
+}
+
+.difficultyBtn[data-difficulty="25"]:hover {
+    background: linear-gradient(45deg, #F44336, #8E0000);
+    box-shadow: 0 0 70px rgba(244, 67, 54, 1);
+    transform: translateY(-2px);
+}
+
+/* Impossible button - Dark Red */
+.difficultyBtn[data-difficulty="0"] {
+    background: linear-gradient(45deg, #B71C1C, #4A0000);
+    box-shadow: 0 0 50px rgba(183, 28, 28, 0.8);
+}
+
+.difficultyBtn[data-difficulty="0"]:hover {
+    background: linear-gradient(45deg, #B71C1C, #4A0000);
+    box-shadow: 0 0 70px rgba(183, 28, 28, 1);
+    transform: translateY(-2px);
+}
+
+/* Custom button - Black */
+#customButton {
+    background: linear-gradient(45deg, #000000, #333333);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+}
+
+#customButton:hover {
+    background: linear-gradient(45deg, #000000, #333333);
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Grid Cells */
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    border: 1px solid lightgray;
+    transition: background-color 0.2s ease;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+.cell.fixed:hover {
+    background-color: #ffe6e6;
+}
+
+.cell.selected {
+    background-color: #e0e0e0;
+}
+
+.cell:focus {
+    outline: none;
+}
+
+/* Medium Grid Lines */
+.cell:nth-child(9n+1),
+.cell:nth-child(9n+4),
+.cell:nth-child(9n+7) {
+    border-left: 3px solid black; /* Vertical medium grid lines */
+}
+
+.cell:nth-child(n+28):nth-child(-n+36),
+.cell:nth-child(n+55):nth-child(-n+63) {
+    border-top: 3px solid black; /* Horizontal medium grid lines (4th & 7th row) */
+}
+
+.cell.fixed {
+    font-weight: bold;
+}
+
+/* Custom Difficulty Styles */
+.custom-difficulty {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
+.slider {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #000000;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #333333;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100px;
+    margin: 0 auto;
+}
+
+.number-input {
+    width: 100%;
+    padding: 5px 25px 5px 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.number-input:focus {
+    border-color: #333333;
+}
+
+.percent {
+    position: absolute;
+    right: 8px;
+    color: #666;
+    pointer-events: none;
+}
+
+/* Update existing button styles to match */
+.menuBtn {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(76, 175, 80, 0.8);
+}
+
+.menuBtn:hover {
+    background: linear-gradient(45deg, #45a049, #4CAF50);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(76, 175, 80, 1);
+    animation: gradientShift 2s ease infinite;
+}
+
+/* Hide number input arrows */
+.number-input::-webkit-inner-spin-button,
+.number-input::-webkit-outer-spin-button {
+    margin: 0;
+}
+
+.number-input[type=number] {
+    width: 100%;
+}
+
+.end-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.end-screen h2 {
+    color: #000000;
+    font-size: 48px;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.end-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.end-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #333333, #444444);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(51, 51, 51, 0.8);
+    min-width: 200px;
+}
+
+.end-btn:hover {
+    background: linear-gradient(45deg, #444444, #333333, #444444);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(51, 51, 51, 1);
+    animation: gradientShift 2s ease infinite;
+}
+
+.new-game-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.new-game-btn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+}
+
+.new-game-btn:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

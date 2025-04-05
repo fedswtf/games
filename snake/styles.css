@@ -1,0 +1,194 @@
+/* Font Declaration */
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../font/ProductSans-Regular.html') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../font/ProductSans-Bold.html') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Base Responsive Layout */
+body {
+    font-family: 'Product Sans', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #1a1a1a, #4a4a4a);
+    color: white;
+}
+
+/* Game Container */
+#game-container {
+    position: relative;
+    margin: 20px;
+}
+
+/* Game Title and Score */
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: clamp(1.5em, 3vw, 2em);
+}
+
+#score {
+    font-size: 24px;
+    margin: 20px 0;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* Game Board */
+#game-board {
+    border: 2px solid #fff;
+    background-color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+/* Controls */
+#controls {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(5px, 1vw, 10px);
+    width: 100%;
+    max-width: 400px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+#start-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+#start-btn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+.game-selector-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.game-selector-btn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+/* Mobile Controls */
+#mobileControls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(3px, 0.5vw, 5px);
+    width: min(300px, 80vw);
+    margin-top: clamp(10px, 2vw, 20px);
+}
+
+.mobileBtn {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #000000, #333333);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.mobileBtn:hover {
+    background: linear-gradient(45deg, #000000, #333333, #000000);
+    background-size: 200% 200%;
+    box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+    transform: translateY(-2px);
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Game Over Screen */
+#game-over {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 100;
+}
+
+#game-over h2 {
+    color: #ff0000;
+    margin-bottom: 20px;
+}
+
+#gameOverContent {
+    background-color: white;
+    padding: clamp(15px, 2vw, 20px);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    width: 300px;
+}
+
+#gameOver p {
+    font-size: clamp(1em, 2vw, 1.2em);
+    margin: 0 0 clamp(15px, 2vw, 20px) 0;
+}
+
+/* Responsive Snake */
+.snake-segment {
+    position: absolute;
+    background-color: #4CAF50;
+    border: 1px solid #45a049;
+}
+
+.food {
+    position: absolute;
+    background-color: #f44336;
+    border-radius: 50%;
+} 

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from md-game.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .login-form input {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form button {
+            padding: 12px;
+            background: linear-gradient(45deg, #000000, #333333);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .login-form button:hover {
+            background: linear-gradient(45deg, #000000, #333333, #000000);
+            background-size: 200% 200%;
+            box-shadow: 0 0 70px rgba(0, 0, 0, 1);
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #ff3333;
+            display: none;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff5f5;
+            border-radius: 8px;
+            border: 1px solid #ffcccc;
+            font-size: 14px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Game Hub</h1>
+        <form class="login-form" id="loginForm">
+            <input type="text" id="username" placeholder="Username" required autocomplete="username">
+            <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+            <button type="submit">Login</button>
+            <div class="error-message" id="errorMessage">Invalid username or password</div>
+        </form>
+    </div>
+    <script src="login.js"></script>
+    <script src="storage-check.js"></script>
+</body>
+
+<!-- Mirrored from md-game.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:43 GMT -->
+</html> 

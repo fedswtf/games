@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from md-game.netlify.app/cookieclicker/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../../identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+    <a class='game-selector-btn' href='../game-selector-2.html'>Game Selector</a>
+    <button class="load-account-btn" onclick="loadFromAccount()">Load from Cloud</button>
+    <button class="show-upgrades-btn" onclick="showUpgrades()">Your Upgrades</button>
+    <button class="save-progress-btn" onclick="saveProgress()">Save Progress</button>
+    <button class="save-account-btn" onclick="saveToAccount()">Save to Cloud</button>
+    <button class="upload-progress-btn" onclick="document.getElementById('fileInput').click()">Upload Progress</button>
+    <button class="reset-progress-btn" onclick="showResetModal()">Reset Progress</button>
+    <input type="file" id="fileInput" accept=".json" style="display: none" onchange="loadProgress(event)">
+    <div class="game-container">
+        <div class="stats">
+            <div class="stat">Cookies: <span id="cookieCount">0</span></div>
+            <div class="stat">Cookies per click: <span id="cookiesPerClick">1</span></div>
+            <div class="stat">Cookies per second: <span id="cookiesPerSecond">0</span></div>
+        </div>
+        <div class="cookie-container">
+            <img src="Assets/cookie.png" alt="Cookie" id="cookie" style="cursor: pointer; user-select: none;">
+        </div>
+        <div class="upgrades-container">
+            <div class="upgrades">
+                <h2>Upgrades</h2>
+                <div class="upgrades-scroll">
+                    <div class="upgrade-item" id="autoClicker">
+                        <span>Auto Clicker (Cost: <span id="autoClickerCost">50</span>)</span>
+                        <button onclick="buyUpgrade('autoClicker')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="grandma">
+                        <span>Grandma (Cost: <span id="grandmaCost">250</span>)</span>
+                        <button onclick="buyUpgrade('grandma')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="factory">
+                        <span>Factory (Cost: <span id="factoryCost">1000</span>)</span>
+                        <button onclick="buyUpgrade('factory')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="mine">
+                        <span>Mine (Cost: <span id="mineCost">5000</span>)</span>
+                        <button onclick="buyUpgrade('mine')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="temple">
+                        <span>Temple (Cost: <span id="templeCost">25000</span>)</span>
+                        <button onclick="buyUpgrade('temple')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="bank">
+                        <span>Bank (Cost: <span id="bankCost">125000</span>)</span>
+                        <button onclick="buyUpgrade('bank')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="timeMachine">
+                        <span>Time Machine (Cost: <span id="timeMachineCost">625000</span>)</span>
+                        <button onclick="buyUpgrade('timeMachine')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="portal">
+                        <span>Portal (Cost: <span id="portalCost">3125000</span>)</span>
+                        <button onclick="buyUpgrade('portal')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="antimatterCondenser">
+                        <span>Antimatter Condenser (Cost: <span id="antimatterCondenserCost">15625000</span>)</span>
+                        <button onclick="buyUpgrade('antimatterCondenser')">Buy</button>
+                    </div>
+                    <div class="upgrade-item" id="prism">
+                        <span>Prism (Cost: <span id="prismCost">78125000</span>)</span>
+                        <button onclick="buyUpgrade('prism')">Buy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="amplifiers">
+                <h2>Amplifiers</h2>
+                <div class="amplifiers-scroll">
+                    <div class="upgrade-item" id="cpsMultiplier">
+                        <span>CPS Multiplier (x<span id="cpsMultiplierValue">1.00</span>) (Cost: <span id="cpsMultiplierCost">1000</span>)</span>
+                        <button onclick="buyAmplifier('cpsMultiplier')">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="upgradesModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Upgrades</h2>
+            <div id="upgradesList"></div>
+        </div>
+    </div>
+    <div id="resetModal" class="modal reset-modal">
+        <div class="modal-content reset-modal-content">
+            <h2>Are you sure you want to reset your progress?</h2>
+            <div class="countdown">5</div>
+            <div class="modal-buttons">
+                <button class="return-btn">Return to Game</button>
+                <button class="confirm-reset-btn" disabled>Reset Progress</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<!-- Mirrored from md-game.netlify.app/cookieclicker/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:40 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from md-game.netlify.app/sudokugame/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku - Game Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Menu Button -->
+    <button id="menuButton">New Game</button>
+
+    <!-- Game Selector Button -->
+    <button id="gameSelectorButton" onclick="window.location.href = '../game-selector.html';">Game Selector</button>
+
+    <!-- Game Title and Lives -->
+    <h1>Sudoku Game</h1>
+    <p>Lives: <span id="lives">❤️ ❤️ ❤️</span></p>
+
+    <!-- Sudoku Board -->
+    <div id="gameContainer">
+        <div id="sudokuBoard"></div>
+    </div>
+
+    <!-- Number Pad -->
+    <div id="numberPad">
+        <button class="numBtn">1</button>
+        <button class="numBtn">2</button>
+        <button class="numBtn">3</button>
+        <button class="numBtn">4</button>
+        <button class="numBtn">5</button>
+        <button class="numBtn">6</button>
+        <button class="numBtn">7</button>
+        <button class="numBtn">8</button>
+        <button class="numBtn">9</button>
+    </div>
+
+    <!-- Popup Menu -->
+    <div id="popupOverlay">
+        <div id="popupMenu">
+            <button id="closePopup">X</button>
+            <h2>New Game</h2>
+            <button class="menuBtn difficultyBtn" data-difficulty="65">Easy (65%)</button>
+            <button class="menuBtn difficultyBtn" data-difficulty="40">Medium (40%)</button>
+            <button class="menuBtn difficultyBtn" data-difficulty="25">Hard (25%)</button>
+            <button class="menuBtn difficultyBtn" data-difficulty="0">Impossible (0%)</button>
+            <button class="menuBtn difficultyBtn" id="customButton" data-difficulty="custom">Custom</button>
+            <div class="custom-difficulty">
+                <div class="slider-container">
+                    <input type="range" id="customSlider" min="0" max="99" value="50" class="slider">
+                    <div class="input-wrapper">
+                        <input type="number" id="customInput" min="0" max="99" value="50" class="number-input">
+                        <span class="percent">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="endScreen" class="end-screen">
+        <h2 id="endTitle">Game Over!</h2>
+        <div class="end-buttons">
+            <button id="newGameBtn" class="end-btn">New Game</button>
+            <button id="gameSelectorBtn" class="end-btn">Game Selector</button>
+            <button id="regenerateBtn" class="end-btn">Re-generate</button>
+        </div>
+    </div>
+
+    <script src="../game-auth.js"></script>
+    <script src="script.js"></script>
+</body>
+
+<!-- Mirrored from md-game.netlify.app/sudokugame/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:37 GMT -->
+</html>

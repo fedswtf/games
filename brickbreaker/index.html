@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from md-game.netlify.app/brickbreaker/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Brick Breaker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a class='game-selector-btn' href='../game-selector-2.html'>Game Selector</a>
+    <div class="controls">
+        <div class="stat">Score: <span id="score">0</span></div>
+        <div class="stat">Lives: <span id="lives">3</span></div>
+        <div class="stat">High Score: <span id="highScore">0</span></div>
+    </div>
+    <div class="power-up-indicator" id="powerUpIndicator">Power-up Active!</div>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="startScreen">
+        <h1>Modern Brick Breaker</h1>
+        <p>Use arrow keys or A/D to move the paddle</p>
+        <p>Break all bricks and collect power-ups!</p>
+        <button id="start-btn">Start Game</button>
+    </div>
+    <div id="gameOver">
+        <h2>Game Over!</h2>
+        <p>Final Score: <span id="final-score">0</span></p>
+        <p>High Score: <span id="finalHighScore">0</span></p>
+        <button id="play-again">Play Again</button>
+    </div>
+    <div id="winScreen">
+        <h2>🏆 You Won! 🏆</h2>
+        <p>Congratulations!</p>
+        <p>Final Score: <span id="win-score">0</span></p>
+        <p>High Score: <span id="winHighScore">0</span></p>
+        <button id="play-again-win">Play Again</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<!-- Mirrored from md-game.netlify.app/brickbreaker/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:32 GMT -->
+</html> 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from md-game.netlify.app/tictactoe/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Game Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Game Selector Button -->
+    <button id="gameSelectorButton" onclick="window.location.href = '../game-selector.html';">Game Selector</button>
+
+    <!-- Game Title and Score -->
+    <h1>Tic Tac Toe</h1>
+    <div class="score-container">
+        <div class="player-score">
+            <span class="player-name">Player X</span>
+            <span id="scoreX">0</span>
+        </div>
+        <div class="player-score">
+            <span class="player-name">Player O</span>
+            <span id="scoreO">0</span>
+        </div>
+    </div>
+
+    <!-- Game Board -->
+    <div id="gameContainer">
+        <div id="gameBoard"></div>
+    </div>
+
+    <button id="aiModeBtn" class="ai-mode-btn">AI Mode: OFF</button>
+
+    <!-- End Screen -->
+    <div id="endScreen" class="end-screen">
+        <h2 id="endTitle">Game Over!</h2>
+        <div class="end-buttons">
+            <button id="newGameBtn" class="end-btn">New Game</button>
+            <button id="gameSelectorBtn" class="end-btn">Game Selector</button>
+            <button id="resetScoreBtn" class="end-btn">Reset Score</button>
+        </div>
+    </div>
+
+    <script src="../game-auth.js"></script>
+    <script src="script.js"></script>
+</body>
+
+<!-- Mirrored from md-game.netlify.app/tictactoe/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:38 GMT -->
+</html> 

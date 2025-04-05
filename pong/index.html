@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from md-game.netlify.app/pong/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Pong</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="score">0 - 0</div>
+        <button id="game-selector" onclick="window.location.href='../game-selector.html'">Game Selector</button>
+        <button id="new-game" onclick="newGame()">New Game</button>
+        
+        <div id="menu">
+            <h1>Modern Pong</h1>
+            <button class="menu-button" onclick="showDifficultyMenu()">Play vs AI</button>
+            <button class="menu-button" onclick="startTwoPlayer()">2 Player Mode</button>
+        </div>
+
+        <div id="difficulty-menu">
+            <h2>Select Difficulty</h2>
+            <button class="menu-button" onclick="startGame('easy')">Easy</button>
+            <button class="menu-button" onclick="startGame('medium')">Medium</button>
+            <button class="menu-button" onclick="startGame('hard')">Hard</button>
+            <button class="menu-button" onclick="hideDifficultyMenu()">Back</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+<!-- Mirrored from md-game.netlify.app/pong/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:42 GMT -->
+</html> 
