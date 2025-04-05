@@ -1,23 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from md-game.netlify.app/game-selector.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:23 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Hub</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Particle background style */
-        #particles-js {
-            position: fixed;
+        /* Base Reset & Theme */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+        }
+
+        /* Top Bar */
+        #topBar {
+            background-color: #111;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 8px rgba(0, 153, 255, 0.3);
+            border-bottom: 2px solid #007acc;
+        }
+
+        #gameSelectorTitle {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00aaff;
+        }
+
+        #searchWrapper input {
+            background-color: #1a1a1a;
+            border: 1px solid #007acc;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        #gamesGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .menuContainer {
+            background-color: #1a1a1a;
+            border: 1px solid #007acc;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+
+        .menuContainer:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #007acc;
+        }
+
+        .menuContainer h1 {
+            color: #00aaff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .menuContainer p {
+            font-size: 0.95em;
+            color: #cfcfcf;
+        }
+
+        .menuContainer img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #007acc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0099ff;
+        }
+
+        .game-link {
+            text-decoration: none;
+        }
+
+        #bottomBar {
+            background-color: #111;
+            padding: 15px;
+            text-align: center;
+            border-top: 2px solid #007acc;
+            box-shadow: 0 -2px 8px rgba(0, 153, 255, 0.3);
+        }
+
+        .sign-out-btn {
+            background-color: #ff3333;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .sign-out-btn:hover {
+            background-color: #ff6666;
+        }
+
+        .preview-container {
+            text-align: center;
+        }
+
+        .square-preview {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            top: 0;
-            left: 0;
-            background-color: rgb(23, 23, 23);
         }
     </style>
 </head>
@@ -215,6 +322,4 @@
 
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"92bb61282bf293fa","version":"2025.3.0","r":1,"serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"c91c287de76e4b9187821eaeb04fd51d","b":1}' crossorigin="anonymous"></script>
 </body>
-
-<!-- Mirrored from md-game.netlify.app/game-selector.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:31 GMT -->
 </html>
