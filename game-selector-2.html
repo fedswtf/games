@@ -1,18 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from md-game.netlify.app/game-selector by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:43 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Hub</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Purple/Pink Modern Theme */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', 'Arial', sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Particles styling */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            background-color: #1a1a2e; /* Dark blue-purple background */
+        }
+        
+        /* Top bar styling */
+        #topBar {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(26, 26, 46, 0.8);
+            border-bottom: 2px solid #e94560; /* Pink accent */
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        #gameSelectorTitle {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(233, 69, 96, 0.5);
+        }
+        
+        #searchWrapper {
+            flex: 0 0 300px;
+        }
+        
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e94560;
+            border-radius: 20px;
+            background-color: rgba(26, 26, 46, 0.5);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        #searchBar:focus {
+            outline: none;
+            box-shadow: 0 0 8px #e94560;
+        }
+        
+        #searchBar::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Games grid styling */
+        #gamesGrid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .menuContainer {
+            background-color: rgba(26, 26, 46, 0.7);
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        .menuContainer:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.3);
+            background-color: rgba(46, 46, 76, 0.8);
+        }
+        
+        .menuContainer h1 {
+            color: #fff;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        
+        .menuContainer p {
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .menuContainer img, .square-preview {
+            max-width: 160px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menuContainer:hover img {
+            transform: scale(1.05);
+        }
+        
+        .preview-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .game-link {
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #7f5af0, #e94560);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 80%;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, #e94560, #7f5af0);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Bottom bar styling */
+        #bottomBar {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(26, 26, 46, 0.8);
+            border-top: 2px solid #e94560;
+            padding: 15px;
+            text-align: right;
+            backdrop-filter: blur(5px);
+        }
+        
+        .sign-out-btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #e94560;
+            width: auto;
+        }
+        
+        .sign-out-btn:hover {
+            background: rgba(233, 69, 96, 0.2);
+        }
+        
+        /* Hidden class for search function */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
+    <!-- Add particles container -->
+    <div id="particles-js"></div>
+    
     <div id="topBar">
-        <span id="gameSelectorTitle">Game Selector</span>
-        <!-- Search Bar inside the Top Rectangle (without the 'Search' label) -->
+        <span id="gameSelectorTitle">Game Hub</span>
+        <!-- Search Bar inside the Top Rectangle -->
         <div id="searchWrapper">
             <input type="text" id="searchBar" placeholder="Search for a game..." oninput="searchGames()">
         </div>
@@ -20,7 +208,7 @@
 
     <div id="gamesGrid">
         <!-- Accessible Games (alphabetically sorted) -->
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="date time clock">
             <h1>Date & Time</h1>
             <p>A simple date and time display for testing purposes.</p>
             <div class="preview-container">
@@ -31,123 +219,123 @@
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="brick breaker arkanoid paddle ball">
             <h1>Brick Breaker</h1>
             <p>Break all the bricks with your ball and paddle in this classic arcade game!</p>
-            <img src="BrickBreaker/brick-preview.png" alt="Brick Breaker Preview" id="brick-breaker-image">
+            <img src="https://Md-game.netlify.app/BrickBreaker/brick-preview.png" alt="Brick Breaker Preview" id="brick-breaker-image">
             <a class='game-link' href='brickbreaker/index.html'>
                 <button id="brick-breaker-button">Play Brick Breaker</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="doodle jump platform jumping infinite">
             <h1>Doodle Jump</h1>
             <p>Jump from platform to platform in this endless jumping game. Collect power-ups and avoid falling!</p>
-            <img src="DoodleJump/doodle-preview.png" alt="Doodle Jump Preview" id="doodle-jump-image">
+            <img src="https://Md-game.netlify.app/DoodleJump/doodle-preview.png" alt="Doodle Jump Preview" id="doodle-jump-image">
             <a class='game-link' href='doodlejump/index.html'>
                 <button id="doodle-jump-button">Play Doodle Jump</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="memory cards matching pairs remember">
             <h1>Memory</h1>
             <p>Test your memory by matching pairs of cards in this classic memory game!</p>
-            <img src="Memory/memory-preview.png" alt="Memory Preview" id="memory-image">
+            <img src="https://Md-game.netlify.app/Memory/memory-preview.png" alt="Memory Preview" id="memory-image">
             <a class='game-link' href='memory/index.html'>
                 <button id="memory-button">Play Memory</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="paper plane flying obstacles runner">
             <h1>Paper Plane</h1>
             <p>Guide your paper plane through obstacles and collect power-ups in this endless runner game!</p>
-            <img src="PaperPlane/paper-preview.png" alt="Paper Plane Preview" id="paper-plane-image">
+            <img src="https://Md-game.netlify.app/PaperPlane/paper-preview.png" alt="Paper Plane Preview" id="paper-plane-image">
             <a class='game-link' href='paperplane/index.html'>
                 <button id="paper-plane-button">Play Paper Plane</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="pong table tennis paddle ball classic">
             <h1>Pong</h1>
             <p>The classic table tennis game! Challenge your friends in this two-player arcade classic.</p>
-            <img src="Pong/pong-preview.png" alt="Pong Preview" id="pong-image">
+            <img src="https://Md-game.netlify.app/Pong/pong-preview.png" alt="Pong Preview" id="pong-image">
             <a class='game-link' href='pong/index.html'>
                 <button id="pong-button">Play Pong</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="snake classic arcade eat grow">
             <h1>Snake</h1>
             <p>A classic snake game. Control the snake to eat food and grow longer, but avoid hitting the walls or yourself!</p>
-            <img src="Snake/snake-preview.png" alt="Snake Preview" id="snake-image">
+            <img src="https://Md-game.netlify.app/Snake/snake-preview.png" alt="Snake Preview" id="snake-image">
             <a class='game-link' href='snake/index.html'>
                 <button id="snake-button">Play Snake</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="space shooter alien spaceship combat">
             <h1>Space Shooter</h1>
             <p>Pilot your spaceship through waves of enemies in this exciting space combat game!</p>
-            <img src="SpaceShooter/space-preview.png" alt="Space Shooter Preview" id="space-shooter-image">
+            <img src="https://Md-game.netlify.app/SpaceShooter/space-preview.png" alt="Space Shooter Preview" id="space-shooter-image">
             <a class='game-link' href='spaceshooter/index.html'>
                 <button id="space-shooter-button">Play Space Shooter</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="sudoku puzzle number logic">
             <h1>Sudoku</h1>
             <p>A classic number puzzle game. Fill the grid so that every row, column, and 3x3 box contains the numbers 1-9.</p>
-            <img src="SudokuGame/sudoku-preview.png" alt="Sudoku Preview" id="sudoku-image">
+            <img src="https://Md-game.netlify.app/SudokuGame/sudoku-preview.png" alt="Sudoku Preview" id="sudoku-image">
             <a class='game-link' href='sudokugame/index.html'>
                 <button id="sudoku-button">Play Sudoku</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="tetris blocks stacking puzzle">
             <h1>Tetris</h1>
             <p>The classic block-stacking puzzle game. Rotate and position falling blocks to create complete lines.</p>
-            <img src="Tetris/tetris-preview.png" alt="Tetris Preview" id="tetris-image">
+            <img src="https://Md-game.netlify.app/Tetris/tetris-preview.png" alt="Tetris Preview" id="tetris-image">
             <a class='game-link' href='tetris/index.html'>
                 <button id="tetris-button">Play Tetris</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="whack a mole arcade reflex hammer">
             <h1>Whack A Mole</h1>
             <p>Test your reflexes in this classic arcade game! Hit the moles as they pop up from their holes.</p>
-            <img src="WhackAMole/mole-preview.png" alt="Whack A Mole Preview" id="whack-a-mole-image">
+            <img src="https://Md-game.netlify.app/WhackAMole/mole-preview.png" alt="Whack A Mole Preview" id="whack-a-mole-image">
             <a class='game-link' href='whackamole/index.html'>
                 <button id="whack-a-mole-button">Play Whack A Mole</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="tic tac toe xo noughts crosses">
             <h1>Tic Tac Toe</h1>
             <p>The classic two-player game! Take turns placing X's and O's to get three in a row.</p>
             <div class="preview-container">
-                <img src="TicTacToe/tic-tac-toe-preview.png" alt="Tic Tac Toe Preview" id="tic-tac-toe-image" class="square-preview">
+                <img src="https://Md-game.netlify.app/TicTacToe/tic-tac-toe-preview.png" alt="Tic Tac Toe Preview" id="tic-tac-toe-image" class="square-preview">
             </div>
             <a class='game-link' href='tictactoe/index.html'>
                 <button id="tic-tac-toe-button">Play Tic Tac Toe</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="test beta development">
             <h1>Test Game</h1>
             <p>A test game for beta testers to try out new features and provide feedback!</p>
             <div class="preview-container">
-                <img src="Test/test-preview.png" alt="Test Game Preview" id="test-image" class="square-preview">
+                <img src="https://Md-game.netlify.app/Test/test-preview.png" alt="Test Game Preview" id="test-image" class="square-preview">
             </div>
             <a class='game-link' href='test/index.html'>
                 <button id="test-button">Play Test Game</button>
             </a>
         </div>
 
-        <div class="menuContainer">
+        <div class="menuContainer" data-game-name="cookie clicker idle upgrade">
             <h1>Cookie Clicker</h1>
             <p>Click cookies and buy upgrades to make more cookies in this addictive idle game!</p>
             <div class="preview-container">
-                <img src="CookieClicker/cookie-preview.png" alt="Cookie Clicker Preview" id="cookie-clicker-image" class="square-preview">
+                <img src="https://Md-game.netlify.app/CookieClicker/cookie-preview.png" alt="Cookie Clicker Preview" id="cookie-clicker-image" class="square-preview">
             </div>
             <a class='game-link' href='cookieclicker/index.html'>
                 <button id="cookie-clicker-button">Play Cookie Clicker</button>
@@ -161,9 +349,91 @@
         </div>
     </div>
 
-    <script src="search.js"></script>
-    <script src="game-selector.js"></script>
+    <!-- Add particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Initialize particles.js with purple/pink particles -->
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ['#7f5af0', '#e94560', '#9c55f5'] }, // Purple/pink particles
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: { 
+                    enable: true, 
+                    distance: 150, 
+                    color: '#7f5af0', 
+                    opacity: 0.4, 
+                    width: 1 
+                },
+                move: { 
+                    enable: true, 
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'grab' },
+                    onclick: { enable: true, mode: 'push' }
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 1 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+    
+    <!-- Search functionality -->
+    <script>
+        function searchGames() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const gameContainers = document.querySelectorAll('.menuContainer');
+            
+            let resultsFound = false;
+            
+            gameContainers.forEach(container => {
+                const gameTitle = container.querySelector('h1').textContent.toLowerCase();
+                const gameDescription = container.querySelector('p').textContent.toLowerCase();
+                const searchData = container.getAttribute('data-game-name').toLowerCase();
+                
+                // Search in title, description, and additional keywords
+                if (gameTitle.includes(searchTerm) || 
+                    gameDescription.includes(searchTerm) || 
+                    searchData.includes(searchTerm)) {
+                    container.classList.remove('hidden');
+                    resultsFound = true;
+                } else {
+                    container.classList.add('hidden');
+                }
+            });
+            
+            // If no results found, you could add a "no results" message
+            // This would require adding a div with id="noResults" to your HTML
+            const noResultsElement = document.getElementById('noResults');
+            if (noResultsElement) {
+                if (searchTerm && !resultsFound) {
+                    noResultsElement.classList.remove('hidden');
+                } else {
+                    noResultsElement.classList.add('hidden');
+                }
+            }
+        }
+        
+        // Simple sign out function (placeholder)
+        function signOut() {
+            alert("You have been signed out!\nJk, we dont make you pay 😎😎😎");
+            // In a real application, you would handle actual sign-out logic here
+        }
+    </script>
 </body>
-
-<!-- Mirrored from md-game.netlify.app/game-selector by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:43 GMT -->
 </html>
