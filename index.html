@@ -1,109 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Selector</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      color: white;
-      background-color: black;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    #background-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    header {
-      text-align: center;
-      padding: 1rem;
-    }
-
-    input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      margin-bottom: 1rem;
-      background: #111;
-      color: white;
-    }
-
-    .game-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1rem;
-    }
-
-    .game {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 12px;
-      padding: 1rem;
-      width: 200px;
-      text-align: center;
-      transition: 0.2s;
-    }
-
-    .game:hover {
-      background: #1a1a1a;
-      transform: scale(1.05);
-    }
-
-    .game img {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .sign-out {
-      background: #00ccff;
-      border: none;
-      padding: 10px 20px;
-      color: black;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .sign-out:hover {
-      background: #00aacc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add particles styling */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            background-color: rgb(23, 23, 23);
+        }
+        
+        /* Update existing elements to appear above particles */
+        #topBar, #gamesGrid, #bottomBar {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
-  <canvas id="background-canvas"></canvas>
+    <!-- Add particles container -->
+    <div id="particles-js"></div>
+    
+    <div id="topBar">
+        <span id="gameSelectorTitle">Game Selector</span>
+        <!-- Search Bar inside the Top Rectangle (without the 'Search' label) -->
+        <div id="searchWrapper">
+            <input type="text" id="searchBar" placeholder="Search for a game..." oninput="searchGames()">
+        </div>
+    </div>
 
-  <header>
-    <h1>🎮 Game Selector</h1>
-    <input type="text" id="searchBar" placeholder="Search games..." />
-  </header>
     <div id="gamesGrid">
         <!-- Accessible Games (alphabetically sorted) -->
         <div class="menuContainer">
@@ -241,103 +173,44 @@
         </div>
     </div>
 
-  <footer>
-    <button class="sign-out">Sign Out</button>
-  </footer>
+    <div id="bottomBar">
+        <div class="bottom-container">
+            <button onclick="signOut()" class="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
 
-  <script>
-    const canvas = document.getElementById('background-canvas');
-    const ctx = canvas.getContext('2d');
-
-    let particles = [];
-    const density = 100;
-    const connectionDistance = 120;
-    const particleRadius = 2;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function spawnParticle(x, y, vx, vy) {
-      particles.push({ x, y, vx, vy });
-    }
-
-    for (let i = 0; i < density; i++) {
-      spawnParticle(
-        Math.random() * canvas.width,
-        Math.random() * canvas.height,
-        (Math.random() - 0.5) * 0.8,
-        (Math.random() - 0.5) * 0.8
-      );
-    }
-
-    canvas.addEventListener('mousemove', (e) => {
-      for (let i = 0; i < 2; i++) {
-        spawnParticle(
-          e.clientX + Math.random() * 10 - 5,
-          e.clientY + Math.random() * 10 - 5,
-          (Math.random() - 0.5) * 1.2,
-          (Math.random() - 0.5) * 1.2
-        );
-      }
-    });
-
-    canvas.addEventListener('click', (e) => {
-      for (let i = 0; i < 6; i++) {
-        spawnParticle(
-          e.clientX,
-          e.clientY,
-          (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 2
-        );
-      }
-    });
-
-    function draw() {
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#00ccff';
-      for (let p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, particleRadius, 0, 2 * Math.PI);
-        ctx.fill();
-      }
-
-      ctx.strokeStyle = '#00ccff40';
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < connectionDistance) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      for (let p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-      }
-
-      if (particles.length > 200) {
-        particles.splice(0, particles.length - 200);
-      }
-
-      requestAnimationFrame(draw);
-    }
-
-    draw();
-  </script>
+    <!-- Add particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Initialize particles.js -->
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'grab' },
+                    onclick: { enable: true, mode: 'push' }
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 1 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+    
+    <!-- Original scripts -->
+    <script src="search.js"></script>
+    <script src="game-selector.js"></script>
 </body>
 </html>
