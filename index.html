@@ -1,95 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from md-game.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:43 GMT -->
+<!-- Mirrored from md-game.netlify.app/game-selector.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:23 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Hub</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .login-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .login-form input {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            width: 100%;
-        }
-
-        .login-form input:focus {
-            outline: none;
-            border-color: #000;
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-form button {
-            padding: 12px;
-            background: linear-gradient(45deg, #000000, #333333);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-        }
-
-        .login-form button:hover {
-            background: linear-gradient(45deg, #000000, #333333, #000000);
-            background-size: 200% 200%;
-            box-shadow: 0 0 70px rgba(0, 0, 0, 1);
-            transform: translateY(-2px);
-        }
-
-        .error-message {
-            color: #ff3333;
-            display: none;
-            text-align: center;
-            padding: 10px;
-            background-color: #fff5f5;
-            border-radius: 8px;
-            border: 1px solid #ffcccc;
-            font-size: 14px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #000;
-        }
-    </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Game Hub</h1>
-        <form class="login-form" id="loginForm">
-            <input type="text" id="username" placeholder="Username" required autocomplete="username">
-            <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
-            <button type="submit">Login</button>
-            <div class="error-message" id="errorMessage">Invalid username or password</div>
-        </form>
+    <div id="topBar">
+        <span id="gameSelectorTitle">Game Selector</span>
+        <!-- Search Bar inside the Top Rectangle (without the 'Search' label) -->
+        <div id="searchWrapper">
+            <input type="text" id="searchBar" placeholder="Search for a game..." oninput="searchGames()">
+        </div>
     </div>
-    <script src="login.js"></script>
+
+    <div id="gamesGrid">
+        <!-- Accessible Games (alphabetically sorted) -->
+        <div class="menuContainer">
+            <h1>Date & Time</h1>
+            <p>A simple date and time display for testing purposes.</p>
+            <div class="preview-container">
+                <img src="date-time/clock.png" alt="Date & Time Preview" id="date-time-image" class="square-preview">
+            </div>
+            <a class='game-link' href='date-time/index.html'>
+                <button id="date-time-button">Play Date & Time</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Brick Breaker</h1>
+            <p>Break all the bricks with your ball and paddle in this classic arcade game!</p>
+            <img src="BrickBreaker/brick-preview.png" alt="Brick Breaker Preview" id="brick-breaker-image">
+            <a class='game-link' href='brickbreaker/index.html'>
+                <button id="brick-breaker-button">Play Brick Breaker</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Doodle Jump</h1>
+            <p>Jump from platform to platform in this endless jumping game. Collect power-ups and avoid falling!</p>
+            <img src="DoodleJump/doodle-preview.png" alt="Doodle Jump Preview" id="doodle-jump-image">
+            <a class='game-link' href='doodlejump/index.html'>
+                <button id="doodle-jump-button">Play Doodle Jump</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Memory</h1>
+            <p>Test your memory by matching pairs of cards in this classic memory game!</p>
+            <img src="Memory/memory-preview.png" alt="Memory Preview" id="memory-image">
+            <a class='game-link' href='memory/index.html'>
+                <button id="memory-button">Play Memory</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Paper Plane</h1>
+            <p>Guide your paper plane through obstacles and collect power-ups in this endless runner game!</p>
+            <img src="PaperPlane/paper-preview.png" alt="Paper Plane Preview" id="paper-plane-image">
+            <a class='game-link' href='paperplane/index.html'>
+                <button id="paper-plane-button">Play Paper Plane</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Pong</h1>
+            <p>The classic table tennis game! Challenge your friends in this two-player arcade classic.</p>
+            <img src="Pong/pong-preview.png" alt="Pong Preview" id="pong-image">
+            <a class='game-link' href='pong/index.html'>
+                <button id="pong-button">Play Pong</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Snake</h1>
+            <p>A classic snake game. Control the snake to eat food and grow longer, but avoid hitting the walls or yourself!</p>
+            <img src="Snake/snake-preview.png" alt="Snake Preview" id="snake-image">
+            <a class='game-link' href='snake/index.html'>
+                <button id="snake-button">Play Snake</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Space Shooter</h1>
+            <p>Pilot your spaceship through waves of enemies in this exciting space combat game!</p>
+            <img src="SpaceShooter/space-preview.png" alt="Space Shooter Preview" id="space-shooter-image">
+            <a class='game-link' href='spaceshooter/index.html'>
+                <button id="space-shooter-button">Play Space Shooter</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Sudoku</h1>
+            <p>A classic number puzzle game. Fill the grid so that every row, column, and 3x3 box contains the numbers 1-9.</p>
+            <img src="SudokuGame/sudoku-preview.png" alt="Sudoku Preview" id="sudoku-image">
+            <a class='game-link' href='sudokugame/index.html'>
+                <button id="sudoku-button">Play Sudoku</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Tetris</h1>
+            <p>The classic block-stacking puzzle game. Rotate and position falling blocks to create complete lines.</p>
+            <img src="Tetris/tetris-preview.png" alt="Tetris Preview" id="tetris-image">
+            <a class='game-link' href='tetris/index.html'>
+                <button id="tetris-button">Play Tetris</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Whack A Mole</h1>
+            <p>Test your reflexes in this classic arcade game! Hit the moles as they pop up from their holes.</p>
+            <img src="WhackAMole/mole-preview.png" alt="Whack A Mole Preview" id="whack-a-mole-image">
+            <a class='game-link' href='whackamole/index.html'>
+                <button id="whack-a-mole-button">Play Whack A Mole</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Tic Tac Toe</h1>
+            <p>The classic two-player game! Take turns placing X's and O's to get three in a row.</p>
+            <div class="preview-container">
+                <img src="TicTacToe/tic-tac-toe-preview.png" alt="Tic Tac Toe Preview" id="tic-tac-toe-image" class="square-preview">
+            </div>
+            <a class='game-link' href='tictactoe/index.html'>
+                <button id="tic-tac-toe-button">Play Tic Tac Toe</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Test Game</h1>
+            <p>A test game for beta testers to try out new features and provide feedback!</p>
+            <div class="preview-container">
+                <img src="Test/test-preview.png" alt="Test Game Preview" id="test-image" class="square-preview">
+            </div>
+            <a class='game-link' href='test/index.html'>
+                <button id="test-button">Play Test Game</button>
+            </a>
+        </div>
+
+        <div class="menuContainer">
+            <h1>Cookie Clicker</h1>
+            <p>Click cookies and buy upgrades to make more cookies in this addictive idle game!</p>
+            <div class="preview-container">
+                <img src="CookieClicker/cookie-preview.png" alt="Cookie Clicker Preview" id="cookie-clicker-image" class="square-preview">
+            </div>
+            <a class='game-link' href='cookieclicker/index.html'>
+                <button id="cookie-clicker-button">Play Cookie Clicker</button>
+            </a>
+        </div>
+    </div>
+
+    <div id="bottomBar">
+        <div class="bottom-container">
+            <button onclick="signOut()" class="sign-out-btn">Sign Out</button>
+        </div>
+    </div>
+
+    <script src="search.js"></script>
+    <script src="game-selector.js"></script>
+    <script src="auth.js"></script>
+    <script src="logout.js"></script>
+    <script src="session-manager.js"></script>
     <script src="storage-check.js"></script>
 </body>
 
-<!-- Mirrored from md-game.netlify.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:43 GMT -->
-</html> 
+<!-- Mirrored from md-game.netlify.app/game-selector.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:31 GMT -->
+</html>
