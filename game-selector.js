@@ -377,22 +377,6 @@ async function sortGames() {
     }
 }
 
-// Initialize when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    // Check if user is logged in
-    const userData = sessionStorage.getItem('userData');
-    if (!userData) {
-        // Redirect to login if not logged in
-        window.location.href = 'index.html';
-        return;
-    }
-    
-    // Log the session data
-    console.log('Session data on load:', userData);
-    console.log('Parsed user data:', JSON.parse(userData));
-    
-    sortGames();
-});
 
 // Function to filter games based on search
 async function searchGames() {
