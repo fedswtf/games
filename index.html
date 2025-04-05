@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Hub</title>
     <style>
-        /* Black and Gold Theme */
+        /* Purple/Pink Modern Theme */
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Arial', sans-serif;
-            color: #ab80d1; /* Gold text */
+            font-family: 'Poppins', 'Arial', sans-serif;
+            color: #fff;
             overflow-x: hidden;
         }
         
@@ -24,26 +24,27 @@
             z-index: 0;
             top: 0;
             left: 0;
-            background-color: #000000; /* Black background */
+            background-color: #1a1a2e; /* Dark blue-purple background */
         }
         
         /* Top bar styling */
         #topBar {
             position: relative;
             z-index: 1;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-bottom: 2px solid #ab80d1;
+            background-color: rgba(26, 26, 46, 0.8);
+            border-bottom: 2px solid #e94560; /* Pink accent */
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
         
         #gameSelectorTitle {
             font-size: 24px;
             font-weight: bold;
-            color: #ab80d1;
-            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            color: #fff;
+            text-shadow: 0 0 5px rgba(233, 69, 96, 0.5);
         }
         
         #searchWrapper {
@@ -53,14 +54,20 @@
         #searchBar {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ab80d1;
+            border: 1px solid #e94560;
             border-radius: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #ab80d1;
+            background-color: rgba(26, 26, 46, 0.5);
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        
+        #searchBar:focus {
+            outline: none;
+            box-shadow: 0 0 8px #e94560;
         }
         
         #searchBar::placeholder {
-            color: rgba(255, 215, 0, 0.6);
+            color: rgba(255, 255, 255, 0.6);
         }
         
         /* Games grid styling */
@@ -68,47 +75,62 @@
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            padding: 20px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .menuContainer {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 1px solid #ab80d1;
-            border-radius: 10px;
+            background-color: rgba(26, 26, 46, 0.7);
+            border: none;
+            border-radius: 12px;
             padding: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            max-width: 250px;
+            margin: 0 auto;
         }
         
         .menuContainer:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.3);
+            background-color: rgba(46, 46, 76, 0.8);
         }
         
         .menuContainer h1 {
-            color: #ab80d1;
-            font-size: 22px;
-            margin-top: 0;
+            color: #fff;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 8px;
             text-align: center;
         }
         
         .menuContainer p {
-            color: #E5C100; /* Slightly darker gold for paragraph text */
+            color: rgba(255, 255, 255, 0.8);
             text-align: center;
             margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
         }
         
         .menuContainer img, .square-preview {
-            max-width: 200px;
+            max-width: 160px;
             height: auto;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 15px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .menuContainer:hover img {
+            transform: scale(1.05);
         }
         
         .preview-container {
@@ -124,41 +146,46 @@
         }
         
         button {
-            background: linear-gradient(to bottom, #ab80d1, #B8860B);
-            color: #000;
+            background: linear-gradient(45deg, #7f5af0, #e94560);
+            color: #fff;
             border: none;
             padding: 10px 20px;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             transition: all 0.3s ease;
             width: 80%;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         button:hover {
-            background: linear-gradient(to bottom, #FFF200, #ab80d1);
+            background: linear-gradient(45deg, #e94560, #7f5af0);
             transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
         
         /* Bottom bar styling */
         #bottomBar {
             position: relative;
             z-index: 1;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-top: 2px solid #ab80d1;
+            background-color: rgba(26, 26, 46, 0.8);
+            border-top: 2px solid #e94560;
             padding: 15px;
             text-align: right;
+            backdrop-filter: blur(5px);
         }
         
         .sign-out-btn {
-            background: linear-gradient(to bottom, #333, #000);
-            color: #ab80d1;
-            border: 1px solid #ab80d1;
+            background: transparent;
+            color: #fff;
+            border: 1px solid #e94560;
             width: auto;
         }
         
         .sign-out-btn:hover {
-            background: linear-gradient(to bottom, #000, #333);
+            background: rgba(233, 69, 96, 0.2);
         }
         
         /* Hidden class for search function */
@@ -325,17 +352,31 @@
     <!-- Add particles.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
-    <!-- Initialize particles.js with gold particles -->
+    <!-- Initialize particles.js with purple/pink particles -->
     <script>
         particlesJS('particles-js', {
             particles: {
                 number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: '#ab80d1' }, // Gold particles
+                color: { value: ['#7f5af0', '#e94560', '#9c55f5'] }, // Purple/pink particles
                 shape: { type: 'circle' },
-                opacity: { value: 0.5 },
+                opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: '#ab80d1', opacity: 0.4, width: 1 }, // Gold links
-                move: { enable: true, speed: 2 }
+                line_linked: { 
+                    enable: true, 
+                    distance: 150, 
+                    color: '#7f5af0', 
+                    opacity: 0.4, 
+                    width: 1 
+                },
+                move: { 
+                    enable: true, 
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
             },
             interactivity: {
                 detect_on: 'canvas',
@@ -390,7 +431,7 @@
         
         // Simple sign out function (placeholder)
         function signOut() {
-            alert("You have been signed out!\nlol jk, we dont require you to pay here 😎😎😎");
+            alert("You have been signed out!");
             // In a real application, you would handle actual sign-out logic here
         }
     </script>
