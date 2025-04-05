@@ -8,14 +8,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Hub</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Particle background style */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            background-color: rgb(23, 23, 23);
+        }
+    </style>
 </head>
 <body>
+    <div id="particles-js"></div>
+
     <div id="topBar">
         <span id="gameSelectorTitle">Game Selector</span>
-        <!-- Search Bar inside the Top Rectangle (without the 'Search' label) -->
+        <div id="searchWrapper">
+            <input type="text" id="searchBar" placeholder="Search for a game..." oninput="searchGames()">
+        </div>
     </div>
 
     <div id="gamesGrid">
+            <div id="gamesGrid">
         <!-- Accessible Games (alphabetically sorted) -->
         <div class="menuContainer">
             <h1>Date & Time</h1>
@@ -151,6 +168,7 @@
             </a>
         </div>
     </div>
+    </div>
 
     <div id="bottomBar">
         <div class="bottom-container">
@@ -160,6 +178,42 @@
 
     <script src="search.js"></script>
     <script src="game-selector.js"></script>
+
+    <!-- Particle JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'grab' },
+                    onclick: { enable: true, mode: 'push' }
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 1 } },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
+
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"92bb61282bf293fa","version":"2025.3.0","r":1,"serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"c91c287de76e4b9187821eaeb04fd51d","b":1}' crossorigin="anonymous"></script>
 </body>
 
 <!-- Mirrored from md-game.netlify.app/game-selector.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 05 Apr 2025 18:35:31 GMT -->
