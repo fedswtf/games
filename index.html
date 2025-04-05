@@ -3,290 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Hub</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Game Selector</title>
   <style>
-    body {
+    * {
       margin: 0;
-      background: black;
-      color: #00aaff;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: Arial, sans-serif;
+      color: white;
+      background-color: black;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
 
-    #topBar {
-      background-color: #001f33;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px #00aaff40;
-    }
-
-    #gameSelectorTitle {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #00aaff;
-    }
-
-    #searchWrapper {
-      flex: 1;
-      margin-left: 20px;
-    }
-
-    #searchBar {
-      padding: 8px;
-      width: 100%;
-      max-width: 300px;
-      background-color: #001f33;
-      border: 1px solid #00aaff;
-      color: #00aaff;
-      border-radius: 4px;
-    }
-
-    #gamesGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .menuContainer {
-      background-color: #002944;
-      border: 1px solid #00aaff;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 4px 8px #00aaff20;
-    }
-
-    .menuContainer h1 {
-      color: #00aaff;
-    }
-
-    .menuContainer p {
-      color: #aaa;
-    }
-
-    .menuContainer img {
-      width: 100%;
-      max-width: 200px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #00aaff33;
-    }
-
-    .menuContainer button {
-      background-color: #00aaff;
-      color: black;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .menuContainer button:hover {
-      background-color: #0077aa;
-    }
-
-    #bottomBar {
-      background-color: #001f33;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 -2px 5px #00aaff40;
-    }
-
-    .sign-out-btn {
-      background-color: #00aaff;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .sign-out-btn:hover {
-      background-color: #0077aa;
-    }
-
-    #particle-canvas {
+    #background-canvas {
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 1rem;
+      background: #111;
+      color: white;
+    }
+
+    .game-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .game {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .game:hover {
+      background: #1a1a1a;
+      transform: scale(1.05);
+    }
+
+    .game img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sign-out {
+      background: #00ccff;
+      border: none;
+      padding: 10px 20px;
+      color: black;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .sign-out:hover {
+      background: #00aacc;
     }
   </style>
 </head>
 <body>
-  <canvas id="particle-canvas"></canvas>
+  <canvas id="background-canvas"></canvas>
 
-  <div id="topBar">
-    <span id="gameSelectorTitle">Game Selector</span>
-    <div id="searchWrapper">
-      <input type="text" id="searchBar" placeholder="Search for a game..." oninput="searchGames()">
+  <header>
+    <h1>🎮 Game Selector</h1>
+    <input type="text" id="searchBar" placeholder="Search games..." />
+  </header>
+
+  <div class="game-list" id="gameList">
+    <!-- Example games -->
+    <div class="game">
+      <img src="https://via.placeholder.com/200x120?text=Game+1" alt="Game 1">
+      <h3>Game 1</h3>
+    </div>
+    <div class="game">
+      <img src="https://via.placeholder.com/200x120?text=Game+2" alt="Game 2">
+      <h3>Game 2</h3>
+    </div>
+    <div class="game">
+      <img src="https://via.placeholder.com/200x120?text=Game+3" alt="Game 3">
+      <h3>Game 3</h3>
     </div>
   </div>
 
-    <div id="gamesGrid">
-        <!-- Accessible Games (alphabetically sorted) -->
-        <div class="menuContainer">
-            <h1>Date & Time</h1>
-            <p>A simple date and time display for testing purposes.</p>
-            <div class="preview-container">
-                <img src="date-time/clock.png" alt="Date & Time Preview" id="date-time-image" class="square-preview">
-            </div>
-            <a class='game-link' href='date-time/index.html'>
-                <button id="date-time-button">Play Date & Time</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Brick Breaker</h1>
-            <p>Break all the bricks with your ball and paddle in this classic arcade game!</p>
-            <img src="https://Md-game.netlify.app/BrickBreaker/brick-preview.png" alt="Brick Breaker Preview" id="brick-breaker-image">
-            <a class='game-link' href='brickbreaker/index.html'>
-                <button id="brick-breaker-button">Play Brick Breaker</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Doodle Jump</h1>
-            <p>Jump from platform to platform in this endless jumping game. Collect power-ups and avoid falling!</p>
-            <img src="https://Md-game.netlify.app/DoodleJump/doodle-preview.png" alt="Doodle Jump Preview" id="doodle-jump-image">
-            <a class='game-link' href='doodlejump/index.html'>
-                <button id="doodle-jump-button">Play Doodle Jump</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Memory</h1>
-            <p>Test your memory by matching pairs of cards in this classic memory game!</p>
-            <img src="https://Md-game.netlify.app/Memory/memory-preview.png" alt="Memory Preview" id="memory-image">
-            <a class='https://Md-game.netlify.app/game-link' href='memory/index.html'>
-                <button id="memory-button">Play Memory</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Paper Plane</h1>
-            <p>Guide your paper plane through obstacles and collect power-ups in this endless runner game!</p>
-            <img src="https://Md-game.netlify.app/PaperPlane/paper-preview.png" alt="Paper Plane Preview" id="paper-plane-image">
-            <a class='game-link' href='paperplane/index.html'>
-                <button id="paper-plane-button">Play Paper Plane</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Pong</h1>
-            <p>The classic table tennis game! Challenge your friends in this two-player arcade classic.</p>
-            <img src="https://Md-game.netlify.app/Pong/pong-preview.png" alt="Pong Preview" id="pong-image">
-            <a class='game-link' href='pong/index.html'>
-                <button id="pong-button">Play Pong</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Snake</h1>
-            <p>A classic snake game. Control the snake to eat food and grow longer, but avoid hitting the walls or yourself!</p>
-            <img src="https://Md-game.netlify.app/Snake/snake-preview.png" alt="Snake Preview" id="snake-image">
-            <a class='game-link' href='snake/index.html'>
-                <button id="snake-button">Play Snake</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Space Shooter</h1>
-            <p>Pilot your spaceship through waves of enemies in this exciting space combat game!</p>
-            <img src="https://Md-game.netlify.app/SpaceShooter/space-preview.png" alt="Space Shooter Preview" id="space-shooter-image">
-            <a class='game-link' href='spaceshooter/index.html'>
-                <button id="space-shooter-button">Play Space Shooter</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Sudoku</h1>
-            <p>A classic number puzzle game. Fill the grid so that every row, column, and 3x3 box contains the numbers 1-9.</p>
-            <img src="https://Md-game.netlify.app/SudokuGame/sudoku-preview.png" alt="Sudoku Preview" id="sudoku-image">
-            <a class='game-link' href='sudokugame/index.html'>
-                <button id="sudoku-button">Play Sudoku</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Tetris</h1>
-            <p>The classic block-stacking puzzle game. Rotate and position falling blocks to create complete lines.</p>
-            <img src="https://Md-game.netlify.app/Tetris/tetris-preview.png" alt="Tetris Preview" id="tetris-image">
-            <a class='game-link' href='tetris/index.html'>
-                <button id="tetris-button">Play Tetris</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Whack A Mole</h1>
-            <p>Test your reflexes in this classic arcade game! Hit the moles as they pop up from their holes.</p>
-            <img src="https://Md-game.netlify.app/WhackAMole/mole-preview.png" alt="Whack A Mole Preview" id="whack-a-mole-image">
-            <a class='game-link' href='whackamole/index.html'>
-                <button id="whack-a-mole-button">Play Whack A Mole</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Tic Tac Toe</h1>
-            <p>The classic two-player game! Take turns placing X's and O's to get three in a row.</p>
-            <div class="preview-container">
-                <img src="https://Md-game.netlify.app/TicTacToe/tic-tac-toe-preview.png" alt="Tic Tac Toe Preview" id="tic-tac-toe-image" class="square-preview">
-            </div>
-            <a class='game-link' href='tictactoe/index.html'>
-                <button id="tic-tac-toe-button">Play Tic Tac Toe</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Test Game</h1>
-            <p>A test game for beta testers to try out new features and provide feedback!</p>
-            <div class="preview-container">
-                <img src="https://Md-game.netlify.app/Test/test-preview.png" alt="Test Game Preview" id="test-image" class="square-preview">
-            </div>
-            <a class='game-link' href='test/index.html'>
-                <button id="test-button">Play Test Game</button>
-            </a>
-        </div>
-
-        <div class="menuContainer">
-            <h1>Cookie Clicker</h1>
-            <p>Click cookies and buy upgrades to make more cookies in this addictive idle game!</p>
-            <div class="preview-container">
-                <img src="https://Md-game.netlify.app/CookieClicker/cookie-preview.png" alt="Cookie Clicker Preview" id="cookie-clicker-image" class="square-preview">
-            </div>
-            <a class='game-link' href='cookieclicker/index.html'>
-                <button id="cookie-clicker-button">Play Cookie Clicker</button>
-            </a>
-        </div>
-    </div>
-
-
-  <div id="bottomBar">
-    <div class="bottom-container">
-      <button onclick="signOut()" class="sign-out-btn">Sign Out</button>
-    </div>
-  </div>
+  <footer>
+    <button class="sign-out">Sign Out</button>
+  </footer>
 
   <script>
-    // Dummy search/signout
-    function searchGames() {}
-    function signOut() {}
-
-    // Particle background
-    const canvas = document.getElementById('particle-canvas');
+    const canvas = document.getElementById('background-canvas');
     const ctx = canvas.getContext('2d');
+
     let particles = [];
+    const density = 100;
+    const connectionDistance = 120;
+    const particleRadius = 2;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -295,55 +140,60 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    class Particle {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.vx = Math.random() * 2 - 1;
-        this.vy = Math.random() * 2 - 1;
-        this.radius = Math.random() * 2 + 1;
+    function spawnParticle(x, y, vx, vy) {
+      particles.push({ x, y, vx, vy });
+    }
+
+    for (let i = 0; i < density; i++) {
+      spawnParticle(
+        Math.random() * canvas.width,
+        Math.random() * canvas.height,
+        (Math.random() - 0.5) * 0.8,
+        (Math.random() - 0.5) * 0.8
+      );
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      for (let i = 0; i < 2; i++) {
+        spawnParticle(
+          e.clientX + Math.random() * 10 - 5,
+          e.clientY + Math.random() * 10 - 5,
+          (Math.random() - 0.5) * 1.2,
+          (Math.random() - 0.5) * 1.2
+        );
       }
+    });
 
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    canvas.addEventListener('click', (e) => {
+      for (let i = 0; i < 6; i++) {
+        spawnParticle(
+          e.clientX,
+          e.clientY,
+          (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 2
+        );
       }
+    });
 
-      draw() {
+    function draw() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ccff';
+      for (let p of particles) {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#00aaff";
+        ctx.arc(p.x, p.y, particleRadius, 0, 2 * Math.PI);
         ctx.fill();
       }
-    }
 
-    function addParticles(x, y, count = 10) {
-      for (let i = 0; i < count; i++) {
-        particles.push(new Particle(x, y));
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-
+      ctx.strokeStyle = '#00ccff40';
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 100) {
+          const dist = Math.hypot(dx, dy);
+          if (dist < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = "#00aaff33";
-            ctx.lineWidth = 1;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
@@ -351,20 +201,22 @@
         }
       }
 
-      requestAnimationFrame(animate);
+      for (let p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      }
+
+      if (particles.length > 200) {
+        particles.splice(0, particles.length - 200);
+      }
+
+      requestAnimationFrame(draw);
     }
 
-    animate();
-
-    // Initial particles
-    for (let i = 0; i < 100; i++) {
-      addParticles(Math.random() * canvas.width, Math.random() * canvas.height, 1);
-    }
-
-    // Spawn more on click anywhere
-    window.addEventListener('click', (e) => {
-      addParticles(e.clientX, e.clientY, 10);
-    });
+    draw();
   </script>
 </body>
 </html>
